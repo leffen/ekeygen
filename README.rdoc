@@ -1,15 +1,18 @@
 = ekeygen
 
-Generate encrypted environmentkeys. So lets assume you have
-you got GITHUB account  and GITHUB secret and want to store 
+Generate encrypted environmentkeys. So lets assume you have you got GITHUB account and GITHUB secret and want to store
 them in a secured way on the development machine. Insted of
 GITHUB_ACCOUNT="x,y,z"
 GITHUB_SECRET="b,e,f"
 
-$ekeygen -a1 "GITHUB_ACCOUNT='x,y,z'" -a2 "GITHUB_SECRET='b,e,f'" -p "password" -e "GSTUFF" -d "~/.ekeys"
-export GSTUFF="dnfgdfg.dfgsdfgsdfg"
+You now have a mutch ncer line
+STUFF="aTY..0K"
 
- 
+Example
+
+$ ekeygen create -a="GITHUB_ACCOUNT='test';GITHUB_SECRET='sasdasdas'" -p="urksannskfdhgkasdkghsdg"
+export STUFF="aTY0R1QwbG54SUlkbE9oVEtEN2ZYd3Q4emdpNVJ0UTlPdzc2L3pQVjlLWG53VXpsRzJTTkV0Ynd2Wk1DCjV3RGtuckVrM2J6Qm16SUNOU1VDckhzUnh3PT0K"
+
 
 :include:ekeygen.rdoc
 
