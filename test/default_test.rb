@@ -9,6 +9,10 @@ class DefaultTest < Test::Unit::TestCase
   end
 
   def test_the_truth
-    assert true
+    data = 'Rødhette og ulven'
+    key = 'Test123'
+
+
+
   end
 end
