@@ -26,8 +26,8 @@ flag [:d, :ekey_directory], :default_value => File.join(ENV['HOME'], '.ekeys')
 desc 'Create a new combined encrypted environment key'
 command :create do |c|
 
-  c.desc 'Environment variable to be used'
-  c.arg_name 'Normal name of environment variable and its value use "XXX=\'Some value\'"'
+  c.desc 'Data to be encrypted'
+  c.arg_name 'argument to be encrypted'
   c.flag [:a, :argument], :required => true
 
   c.desc 'Encryption password'
@@ -46,11 +46,31 @@ command :create do |c|
       :cipher => 'aes-128-cbc'
     )
 
-    puts "export #{options[:e]}=\"#{Base64.urlsafe_encode64(SymmetricEncryption.encrypt(options[:a]))}\""
-
+    puts "export #{options[:e].upcase}=\"#{Base64.urlsafe_encode64(SymmetricEncryption.encrypt(options[:a]))}\""
 
   end
 end
+
+desc 'Encode a environment key'
+command :enc do |c|
+
+  c.desc 'Data to be encrypted'
+  c.arg_name 'argument to be encrypted'
+  c.flag [:a, :argument], :required => true
+
+  c.desc 'Envirnment variable name'
+  c.arg_name 'Name of environment variable to assign key to'
+  c.flag [:e, :env_var_name], :default_value => 'STUFF'
+
+  c.action do |global_options, options, args|
+    puts "export #{options[:e].upcase}=\"#{Base64.urlsafe_encode64(options[:a])}\""
+    puts "import into ruby : #{options[:e]}=Base64.urlsafe_decode64(ENV[\"#{options[:e].upcase}\"])} "
+
+  end
+end
+
+
+
 
 
 pre do |global, command, options, args|
